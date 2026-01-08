@@ -205,7 +205,7 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
 
             <div className="border-t border-gray-200 dark:border-gray-700 pt-5 mt-2">
               <h3 className="text-base font-semibold text-gray-900 dark:text-white">
-                Kartplassering (valgfritt)
+                📍 Kartplassering (valgfritt)
               </h3>
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
                 Legg til koordinater for å vise arrangementet på kartet. Du kan finne koordinater på{' '}

@@ -114,12 +114,12 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-950">
       <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
         <div className="h-1 bg-gradient-to-r from-blue-600 to-purple-600" />
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Inkluderingsapp
+            🎓 Inkluderingsapp
           </h1>
           <p className="mt-2 text-gray-600 dark:text-gray-400">
             Finn og delta på arrangementer for studenter
@@ -147,7 +147,7 @@ export default function Home() {
                     : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                 }`}
               >
-                Liste
+                📋 Liste
               </button>
               <button
                 onClick={() => setViewMode('map')}
@@ -157,14 +157,14 @@ export default function Home() {
                     : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                 }`}
               >
-                Kart
+                🗺️ Kart
               </button>
             </div>
             <button
               onClick={() => setShowAddForm(true)}
               className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
             >
-              Legg til arrangement
+              ✨ Legg til arrangement
             </button>
           </div>
         </div>
