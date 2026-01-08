@@ -115,10 +115,15 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <header className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-8 shadow-lg">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-2">🎓 Inkluderingsapp</h1>
-          <p className="text-blue-100">Finn og delta på arrangementer for studenter</p>
+      <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+        <div className="h-1 bg-gradient-to-r from-blue-600 to-purple-600" />
+        <div className="container mx-auto px-4 py-8">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
+            Inkluderingsapp
+          </h1>
+          <p className="mt-2 text-gray-600 dark:text-gray-400">
+            Finn og delta på arrangementer for studenter
+          </p>
         </div>
       </header>
 
@@ -133,33 +138,33 @@ export default function Home() {
             </p>
           </div>
           <div className="flex gap-3">
-            <div className="flex bg-gray-200 dark:bg-gray-700 rounded-lg p-1">
+            <div className="flex bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-1">
               <button
                 onClick={() => setViewMode('list')}
-                className={`px-4 py-2 rounded-md transition-colors ${
+                className={`px-4 py-2 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   viewMode === 'list'
-                    ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow'
-                    : 'text-gray-600 dark:text-gray-300'
+                    ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
+                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                 }`}
               >
-                📋 Liste
+                Liste
               </button>
               <button
                 onClick={() => setViewMode('map')}
-                className={`px-4 py-2 rounded-md transition-colors ${
+                className={`px-4 py-2 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   viewMode === 'map'
-                    ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow'
-                    : 'text-gray-600 dark:text-gray-300'
+                    ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
+                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                 }`}
               >
-                🗺️ Kart
+                Kart
               </button>
             </div>
             <button
               onClick={() => setShowAddForm(true)}
-              className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium shadow-md"
+              className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
             >
-              + Legg til
+              Legg til arrangement
             </button>
           </div>
         </div>
@@ -175,7 +180,7 @@ export default function Home() {
         {filteredEvents.length === 0 ? (
           <div className="text-center py-16">
             <p className="text-xl text-gray-500 dark:text-gray-400">
-              Ingen arrangementer funnet med disse filtrene 😔
+              Ingen arrangementer funnet med disse filtrene
             </p>
             <p className="text-gray-400 dark:text-gray-500 mt-2">
               Prøv å endre filtrene eller legg til et nytt arrangement!
