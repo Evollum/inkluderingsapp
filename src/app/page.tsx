@@ -1,11 +1,13 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import EventCard from '@/components/EventCard';
 import FilterBar from '@/components/FilterBar';
 import AddEventForm from '@/components/AddEventForm';
-import MapView from '@/components/MapView';
 import { Event, EventCategory, CITIES } from '@/types/event';
+
+const MapView = dynamic(() => import('@/components/MapView'), { ssr: false });
 
 // Sample data
 const SAMPLE_EVENTS: Event[] = [
