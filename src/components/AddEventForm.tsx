@@ -49,22 +49,30 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Legg til nytt arrangement
-            </h2>
+          <div className="flex items-start justify-between gap-6">
+            <div>
+              <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                Legg til arrangement
+              </h2>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                Fyll inn detaljer, så vises arrangementet i listen.
+              </p>
+            </div>
             <button
               onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl"
+              aria-label="Lukk"
+              className="shrink-0 rounded-lg px-3 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               ×
             </button>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="h-px bg-gray-200 dark:bg-gray-700 my-6" />
+
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Tittel *
@@ -195,12 +203,20 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
               />
             </div>
 
-            <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-2">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                📍 Kartplassering (valgfritt)
+            <div className="border-t border-gray-200 dark:border-gray-700 pt-5 mt-2">
+              <h3 className="text-base font-semibold text-gray-900 dark:text-white">
+                Kartplassering (valgfritt)
               </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                Legg til koordinater for å vise arrangementet på kartet. Du kan finne koordinater på <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google Maps</a>.
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                Legg til koordinater for å vise arrangementet på kartet. Du kan finne koordinater på{' '}
+                <a
+                  href="https://www.google.com/maps"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline dark:text-blue-400"
+                >
+                  Google Maps
+                </a>.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -232,17 +248,17 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
               </div>
             </div>
 
-            <div className="flex gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 pt-4">
               <button
                 type="submit"
-                className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 Legg til arrangement
               </button>
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 px-6 py-3 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-white rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors font-medium"
+                className="flex-1 px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-gray-400"
               >
                 Avbryt
               </button>
