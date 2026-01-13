@@ -131,7 +131,7 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<EventCategory | 'all'>('all');
   const [showAddForm, setShowAddForm] = useState(false);
   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
-  const [toast, setToast] = useState<null | { id: string; message: string; type?: 'success' | 'info' | 'error' }>(null);
+  const [toasts, setToasts] = useState<Array<{ id: string; message: string; type?: 'success' | 'info' | 'error'; actionLabel?: string; onAction?: () => void }>>([]);
 
   const filteredEvents = events.filter((event) => {
     const cityMatch = selectedCity === 'all' || event.city === selectedCity;
@@ -139,9 +139,15 @@ export default function Home() {
     return cityMatch && categoryMatch;
   });
 
+  const addToast = (t: { id: string; message: string; type?: 'success' | 'info' | 'error'; actionLabel?: string; onAction?: () => void }) => {
+    setToasts((prev) => [...prev, t]);
+  };
+
+  const removeToast = (id: string) => setToasts((prev) => prev.filter((t) => t.id !== id));
+
   const handleAddEvent = (newEvent: Event) => {
     setEvents([newEvent, ...events]);
-    setToast({ id: newEvent.id, message: 'Arrangement lagt til', type: 'success' });
+    addToast({ id: `add-${newEvent.id}`, message: 'Arrangement lagt til', type: 'success' });
   };
 
   const handleSignUp = (id: string) => {
@@ -153,7 +159,19 @@ export default function Home() {
         return { ...ev, currentParticipants: ev.currentParticipants + 1 };
       })
     );
-    setToast({ id: id, message: 'Du er påmeldt!', type: 'success' });
+
+    // prepare undo action
+    const undo = () => {
+      setEvents((prev) =>
+        prev.map((ev) => {
+          if (ev.id !== id) return ev;
+          return { ...ev, currentParticipants: Math.max(0, ev.currentParticipants - 1) };
+        })
+      );
+      addToast({ id: `undo-${id}-${Date.now()}`, message: 'Påmelding angret', type: 'info' });
+    };
+
+    addToast({ id: `signup-${id}-${Date.now()}`, message: 'Du er påmeldt!', type: 'success', actionLabel: 'Angre', onAction: undo });
   };
 
   return (
@@ -221,14 +239,18 @@ export default function Home() {
         />
 
         <div className="toast-container">
-          {toast && (
+          {toasts.map((t) => (
             <Toast
-              key={toast.id}
-              message={toast.message}
-              type={toast.type}
-              onClose={() => setToast(null)}
+              key={t.id}
+              id={t.id}
+              message={t.message}
+              type={t.type}
+              actionLabel={t.actionLabel}
+              onAction={t.onAction}
+              onClose={() => removeToast(t.id)}
+              duration={5000}
             />
-          )}
+          ))}
         </div>
 
         {filteredEvents.length === 0 ? (
