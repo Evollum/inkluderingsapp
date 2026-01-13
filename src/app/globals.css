@@ -16,6 +16,12 @@
   --border: rgba(15,23,42,0.08);
 }
 
+/* Logo tweaks: remove white background visually using blend mode */
+.logo-img {
+  mix-blend-mode: multiply;
+  background: transparent;
+}
+
 .dark {
   --background: #061025;
   --foreground: #eef2ff; /* light text on dark */

@@ -179,44 +179,13 @@ export default function Home() {
     <div className="min-h-screen">
       <header className="py-8">
         <div className="container mx-auto px-4">
-          <div className="card-surface p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/bilder/198ce145-031c-4804-92f9-49bd1e90e64b.png`} alt="ses logo" className="h-10 w-10 rounded-md object-contain" />
-              <div>
-                <h1 className="text-3xl sm:text-4xl font-bold tracking-tight label">ses</h1>
-                <p className="mt-1 text-sm muted">Finn og delta på arrangementer for studenter</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="flex rounded-lg p-1 panel">
-                <button
-                  onClick={() => setViewMode('list')}
-                  className={
-                    viewMode === 'list'
-                      ? 'px-4 py-2 rounded-md transition-colors focus:outline-none bg-panel label shadow-sm'
-                      : 'px-4 py-2 rounded-md transition-colors focus:outline-none btn-ghost muted'
-                  }
-                >
-                  📋 Liste
-                </button>
-                <button
-                  onClick={() => setViewMode('map')}
-                  className={
-                    viewMode === 'map'
-                      ? 'px-4 py-2 rounded-md transition-colors focus:outline-none bg-panel label shadow-sm'
-                      : 'px-4 py-2 rounded-md transition-colors focus:outline-none btn-ghost muted'
-                  }
-                >
-                  🗺️ Kart
-                </button>
-              </div>
-              <button
-                onClick={() => setShowAddForm(true)}
-                className="btn-primary"
-              >
-                ✨ Legg til arrangement
-              </button>
-            </div>
+          <div className="card-surface p-6 flex items-center gap-4">
+            <img
+              src="https://raw.githubusercontent.com/Evollum/inkluderingsapp/main/bilder/198ce145-031c-4804-92f9-49bd1e90e64b.png"
+              alt="ses logo"
+              className="h-12 w-12 object-contain logo-img"
+            />
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight label">ses</h1>
           </div>
           {/* mobile placeholder removed (was causing duplicate rendering) */}
         </div>
