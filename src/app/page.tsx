@@ -5,6 +5,7 @@ import { useState } from 'react';
 import EventCard from '@/components/EventCard';
 import FilterBar from '@/components/FilterBar';
 import AddEventForm from '@/components/AddEventForm';
+import BottomNav from '@/components/BottomNav';
 import { Event, EventCategory, CITIES } from '@/types/event';
 import Toast from '@/components/Toast';
 
@@ -179,9 +180,12 @@ export default function Home() {
       <header className="py-8">
         <div className="container mx-auto px-4">
           <div className="card-surface p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <h1 className="text-3xl sm:text-4xl font-bold tracking-tight label">🎓 Inkluderingsapp</h1>
-              <p className="mt-1 text-sm muted">Finn og delta på arrangementer for studenter</p>
+            <div className="flex items-center gap-3">
+              <img src="/Bilder/198ce145-031c-4804-92f9-49bd1e90e64b.png" alt="ses logo" className="h-10 w-10 rounded-md object-contain" />
+              <div>
+                <h1 className="text-3xl sm:text-4xl font-bold tracking-tight label">ses</h1>
+                <p className="mt-1 text-sm muted">Finn og delta på arrangementer for studenter</p>
+              </div>
             </div>
             <div className="flex items-center gap-3">
               <div className="flex rounded-lg p-1 panel">
@@ -212,6 +216,12 @@ export default function Home() {
               >
                 ✨ Legg til arrangement
               </button>
+            </div>
+          </div>
+          <div>
+            {/* bottom nav for mobile */}
+            <div className="sm:hidden">
+              <script />
             </div>
           </div>
         </div>
@@ -302,6 +312,7 @@ export default function Home() {
             ))}
           </div>
         )}
+        <BottomNav viewMode={viewMode} setViewMode={setViewMode} onAdd={() => setShowAddForm(true)} />
       </main>
 
       {showAddForm && (

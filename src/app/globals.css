@@ -135,6 +135,17 @@ button.btn-primary {
   color: white;
 }
 
+/* Bottom navigation */
+.bottom-nav { }
+
+@media (max-width: 640px) {
+  .bottom-nav { display: block; }
+}
+
+@media (min-width: 641px) {
+  .bottom-nav { display: none; }
+}
+
 /* Toast animations */
 @keyframes toast-in {
   from {
