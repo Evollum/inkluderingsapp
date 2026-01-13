@@ -73,8 +73,8 @@ export default function MapView({ events, onEventClick }: MapViewProps) {
 
   if (!isClient) {
     return (
-      <div className="h-full w-full flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg">
-        <p className="text-gray-600 dark:text-gray-400">Laster kart...</p>
+      <div className="h-full w-full flex items-center justify-center panel">
+        <p className="muted">Laster kart...</p>
       </div>
     );
   }
@@ -108,15 +108,15 @@ export default function MapView({ events, onEventClick }: MapViewProps) {
               }}
             >
               <Popup>
-                <div className="p-2 min-w-[200px]">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xl">{category.emoji}</span>
+                <div className="card-surface p-3 rounded-lg min-w-[220px]">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-2xl">{category.emoji}</span>
                     <h3 className="font-bold text-lg">{event.title}</h3>
                   </div>
-                  <p className="text-sm text-gray-600 mb-2">{event.description}</p>
-                  <div className="space-y-1 text-sm">
+                  <p className="text-sm muted mb-2">{event.description}</p>
+                  <div className="space-y-1 text-sm muted">
                     <p><strong>📍</strong> {event.location}</p>
-                    <p><strong>📅</strong> {event.date} kl. {event.time}</p>
+                    <p><strong>📅</strong> {formatDateShort(event.date)} kl. {formatTimeDot(event.time)}</p>
                     <p><strong>🏙️</strong> {event.city}</p>
                     <p><strong>👤</strong> {event.organizer}</p>
                   </div>
@@ -129,13 +129,9 @@ export default function MapView({ events, onEventClick }: MapViewProps) {
                     <button
                       onClick={() => onEventClick?.(event)}
                       disabled={!!(event.maxParticipants && event.currentParticipants >= event.maxParticipants)}
-                      className={`px-3 py-1 rounded-md text-sm font-medium text-white ${
-                        event.maxParticipants && event.currentParticipants >= event.maxParticipants
-                          ? 'bg-gray-400 cursor-not-allowed'
-                          : 'bg-blue-600 hover:bg-blue-700'
-                      }`}
+                      className={event.maxParticipants && event.currentParticipants >= event.maxParticipants ? 'btn-ghost' : 'btn-primary'}
                     >
-                      Meld deg på
+                      {event.maxParticipants && event.currentParticipants >= event.maxParticipants ? 'Fullt' : 'Meld deg på'}
                     </button>
                   </div>
                 </div>

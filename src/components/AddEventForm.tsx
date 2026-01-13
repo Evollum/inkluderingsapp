@@ -61,31 +61,31 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="card-surface rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex items-start justify-between gap-6">
             <div>
-              <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                Legg til arrangement
+              <h2 className="text-xl sm:text-2xl font-semibold tracking-tight label">
+                ✨ Legg til arrangement
               </h2>
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Fyll inn detaljer, så vises arrangementet i listen.
+              <p className="mt-1 text-sm muted">
+                Fyll inn detaljer — arrangementet vises i listen og på kartet.
               </p>
             </div>
             <button
               onClick={onClose}
               aria-label="Lukk"
-              className="shrink-0 rounded-lg px-3 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="shrink-0 btn-ghost"
             >
-              ×
+              ✕
             </button>
           </div>
 
-          <div className="h-px bg-gray-200 dark:bg-gray-700 my-6" />
+          <div className="h-px my-6" style={{ background: 'var(--border)' }} />
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm label mb-2">
                 Tittel *
               </label>
               <input
@@ -93,12 +93,12 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
                 required
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="input-field w-full"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm label mb-2">
                 Beskrivelse *
               </label>
               <textarea
@@ -106,19 +106,19 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
                 rows={3}
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="input-field w-full"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm label mb-2">
                   Kategori *
                 </label>
                 <select
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value as EventCategory })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className="input-field w-full"
                 >
                   {Object.entries(CATEGORIES).map(([key, cat]) => (
                     <option key={key} value={key}>
@@ -129,13 +129,13 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm label mb-2">
                   By *
                 </label>
                 <select
                   value={formData.city}
                   onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className="input-field w-full"
                 >
                   {CITIES.map((city) => (
                     <option key={city} value={city}>
@@ -148,7 +148,7 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm label mb-2">
                   Dato *
                 </label>
                 <input
@@ -156,12 +156,12 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
                   required
                   value={formData.date}
                   onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className="input-field w-full"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm label mb-2">
                   Tidspunkt *
                 </label>
                 <input
@@ -169,13 +169,13 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
                   required
                   value={formData.time}
                   onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className="input-field w-full"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm label mb-2">
                 Sted *
               </label>
               <input
@@ -183,13 +183,13 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
                 required
                 value={formData.location}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="input-field w-full"
                 placeholder="F.eks. Studentsenteret, Rom 101"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm label mb-2">
                 Arrangør *
               </label>
               <input
@@ -197,12 +197,12 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
                 required
                 value={formData.organizer}
                 onChange={(e) => setFormData({ ...formData, organizer: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="input-field w-full"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm label mb-2">
                 Maks antall deltakere (valgfritt)
               </label>
               <input
@@ -210,26 +210,17 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
                 min="1"
                 value={formData.maxParticipants}
                 onChange={(e) => setFormData({ ...formData, maxParticipants: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="input-field w-full"
               />
             </div>
 
             {/* Coordinates are resolved automatically from the address */}
 
             <div className="flex flex-col sm:flex-row gap-3 pt-4">
-              <button
-                type="submit"
-                className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                Legg til arrangement
-              </button>
-              <button
-                type="button"
-                onClick={onClose}
-                className="flex-1 px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-gray-400"
-              >
-                Avbryt
-              </button>
+            <div className="flex flex-col sm:flex-row gap-3 pt-4">
+              <button type="submit" className="btn-primary flex-1">Legg til arrangement</button>
+              <button type="button" onClick={onClose} className="btn-ghost flex-1">Avbryt</button>
+            </div>
             </div>
           </form>
         </div>

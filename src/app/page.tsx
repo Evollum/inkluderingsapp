@@ -175,37 +175,66 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-950">
-      <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-        <div className="h-1 bg-gradient-to-r from-blue-600 to-purple-600" />
-        <div className="container mx-auto px-4 py-8">
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-            🎓 Inkluderingsapp
-          </h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">
-            Finn og delta på arrangementer for studenter
-          </p>
+    <div className="min-h-screen">
+      <header className="py-8">
+        <div className="container mx-auto px-4">
+          <div className="card-surface p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h1 className="text-3xl sm:text-4xl font-bold tracking-tight label">🎓 Inkluderingsapp</h1>
+              <p className="mt-1 text-sm muted">Finn og delta på arrangementer for studenter</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="flex rounded-lg p-1 panel">
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={
+                    viewMode === 'list'
+                      ? 'px-4 py-2 rounded-md transition-colors focus:outline-none bg-panel label shadow-sm'
+                      : 'px-4 py-2 rounded-md transition-colors focus:outline-none btn-ghost muted'
+                  }
+                >
+                  📋 Liste
+                </button>
+                <button
+                  onClick={() => setViewMode('map')}
+                  className={
+                    viewMode === 'map'
+                      ? 'px-4 py-2 rounded-md transition-colors focus:outline-none bg-panel label shadow-sm'
+                      : 'px-4 py-2 rounded-md transition-colors focus:outline-none btn-ghost muted'
+                  }
+                >
+                  🗺️ Kart
+                </button>
+              </div>
+              <button
+                onClick={() => setShowAddForm(true)}
+                className="btn-primary"
+              >
+                ✨ Legg til arrangement
+              </button>
+            </div>
+          </div>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            <h2 className="text-2xl font-bold label mb-2">
               Kommende arrangementer
             </h2>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="muted">
               {filteredEvents.length} arrangement{filteredEvents.length !== 1 ? 'er' : ''} funnet
             </p>
           </div>
           <div className="flex gap-3">
-            <div className="flex bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-1">
+            <div className="flex panel rounded-lg p-1">
               <button
                 onClick={() => setViewMode('list')}
                 className={`px-4 py-2 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   viewMode === 'list'
-                    ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                    ? 'bg-panel label shadow-sm'
+                    : 'muted'
                 }`}
               >
                 📋 Liste
@@ -214,8 +243,8 @@ export default function Home() {
                 onClick={() => setViewMode('map')}
                 className={`px-4 py-2 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   viewMode === 'map'
-                    ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                    ? 'bg-panel label shadow-sm'
+                    : 'muted'
                 }`}
               >
                 🗺️ Kart
@@ -223,7 +252,7 @@ export default function Home() {
             </div>
             <button
               onClick={() => setShowAddForm(true)}
-              className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="btn-primary"
             >
               ✨ Legg til arrangement
             </button>
@@ -255,10 +284,10 @@ export default function Home() {
 
         {filteredEvents.length === 0 ? (
           <div className="text-center py-16">
-            <p className="text-xl text-gray-500 dark:text-gray-400">
+            <p className="text-xl muted">
               Ingen arrangementer funnet med disse filtrene
             </p>
-            <p className="text-gray-400 dark:text-gray-500 mt-2">
+            <p className="muted mt-2">
               Prøv å endre filtrene eller legg til et nytt arrangement!
             </p>
           </div>
@@ -282,7 +311,7 @@ export default function Home() {
         />
       )}
 
-      <footer className="bg-gray-800 text-white py-6 mt-16">
+      <footer className="footer py-6 mt-16">
         <div className="container mx-auto px-4 text-center">
           <p>&copy; 2026 Inkluderingsapp - Laget for studenter, av studenter</p>
         </div>
