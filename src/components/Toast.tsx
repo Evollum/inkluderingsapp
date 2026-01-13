@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export type ToastType = "success" | "info" | "error";
 
@@ -15,15 +15,22 @@ interface ToastProps {
 }
 
 export default function Toast({ id, message, type = "info", onClose, duration = 4000, actionLabel, onAction }: ToastProps) {
+  const [closing, setClosing] = useState(false);
+  const animationDuration = 220; // ms
+
   useEffect(() => {
-    const t = setTimeout(() => onClose(id), duration);
+    const t = setTimeout(() => {
+      // start exit animation then call onClose after animation duration
+      setClosing(true);
+      setTimeout(() => onClose(id), animationDuration);
+    }, duration);
     return () => clearTimeout(t);
   }, [onClose, duration, id]);
 
   const bg = type === "success" ? "bg-green-600" : type === "error" ? "bg-red-600" : "bg-blue-600";
 
   return (
-    <div className={`max-w-sm w-full ${bg} text-white shadow-lg rounded-lg pointer-events-auto`} role="status">
+    <div className={`max-w-sm w-full ${bg} text-white shadow-lg rounded-lg pointer-events-auto ${closing ? 'toast-exit' : 'toast-enter'}`} role="status">
       <div className="p-3">
         <div className="flex items-center justify-between gap-3">
           <div className="flex-1 text-sm font-medium leading-tight">{message}</div>
@@ -32,7 +39,9 @@ export default function Toast({ id, message, type = "info", onClose, duration = 
               <button
                 onClick={() => {
                   onAction?.();
-                  onClose(id);
+                  // close with animation
+                  setClosing(true);
+                  setTimeout(() => onClose(id), animationDuration);
                 }}
                 className="bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded-md text-sm"
               >
@@ -40,7 +49,7 @@ export default function Toast({ id, message, type = "info", onClose, duration = 
               </button>
             )}
             <button
-              onClick={() => onClose(id)}
+              onClick={() => { setClosing(true); setTimeout(() => onClose(id), animationDuration); }}
               className="opacity-90 hover:opacity-100 text-white rounded-md p-1"
               aria-label="Close"
             >
