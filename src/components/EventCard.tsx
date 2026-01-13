@@ -4,9 +4,10 @@ import { Event, CATEGORIES } from '@/types/event';
 
 interface EventCardProps {
   event: Event;
+  onSignUp?: (id: string) => void;
 }
 
-export default function EventCard({ event }: EventCardProps) {
+export default function EventCard({ event, onSignUp }: EventCardProps) {
   const category = CATEGORIES[event.category];
   
   return (
@@ -56,7 +57,16 @@ export default function EventCard({ event }: EventCardProps) {
         </dl>
         
         <div className="mt-5 flex items-center justify-end">
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <button
+            type="button"
+            onClick={() => onSignUp?.(event.id)}
+            disabled={!!(event.maxParticipants && event.currentParticipants >= event.maxParticipants)}
+            className={`px-4 py-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              event.maxParticipants && event.currentParticipants >= event.maxParticipants
+                ? 'bg-gray-400 text-white cursor-not-allowed'
+                : 'bg-blue-600 text-white hover:bg-blue-700'
+            }`}
+          >
             Meld deg på
           </button>
         </div>

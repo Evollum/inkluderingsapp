@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { EventCategory, CATEGORIES, CITIES } from '@/types/event';
+import { EventCategory, CATEGORIES, CITIES, CITY_COORDINATES } from '@/types/event';
 
 interface AddEventFormProps {
   onClose: () => void;
@@ -19,13 +19,27 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
     location: '',
     organizer: '',
     maxParticipants: '',
-    lat: '',
-    lng: '',
   });
-
-  const handleSubmit = (e: React.FormEvent) => {
+  
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
+    // Try to geocode the address (location + city) using Nominatim
+    const query = encodeURIComponent(`${formData.location}, ${formData.city}`);
+    let coords = CITY_COORDINATES[formData.city] ?? { lat: 59.9139, lng: 10.7522 };
+
+    try {
+      const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`);
+      if (res.ok) {
+        const results = await res.json();
+        if (results && results.length > 0) {
+          coords = { lat: parseFloat(results[0].lat), lng: parseFloat(results[0].lon) };
+        }
+      }
+    } catch (err) {
+      // ignore and fallback to city center
+    }
+
     const newEvent = {
       id: Date.now().toString(),
       title: formData.title,
@@ -38,12 +52,9 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
       organizer: formData.organizer,
       maxParticipants: formData.maxParticipants ? parseInt(formData.maxParticipants) : undefined,
       currentParticipants: 0,
-      coordinates: {
-        lat: formData.lat ? parseFloat(formData.lat) : 59.9139,
-        lng: formData.lng ? parseFloat(formData.lng) : 10.7522,
-      },
+      coordinates: coords,
     };
-    
+
     onAdd(newEvent);
     onClose();
   };
@@ -203,50 +214,7 @@ export default function AddEventForm({ onClose, onAdd }: AddEventFormProps) {
               />
             </div>
 
-            <div className="border-t border-gray-200 dark:border-gray-700 pt-5 mt-2">
-              <h3 className="text-base font-semibold text-gray-900 dark:text-white">
-                📍 Kartplassering (valgfritt)
-              </h3>
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Legg til koordinater for å vise arrangementet på kartet. Du kan finne koordinater på{' '}
-                <a
-                  href="https://www.google.com/maps"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline dark:text-blue-400"
-                >
-                  Google Maps
-                </a>.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Breddegrad (Latitude)
-                  </label>
-                  <input
-                    type="number"
-                    step="0.000001"
-                    value={formData.lat}
-                    onChange={(e) => setFormData({ ...formData, lat: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    placeholder="F.eks. 59.9139"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Lengdegrad (Longitude)
-                  </label>
-                  <input
-                    type="number"
-                    step="0.000001"
-                    value={formData.lng}
-                    onChange={(e) => setFormData({ ...formData, lng: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    placeholder="F.eks. 10.7522"
-                  />
-                </div>
-              </div>
-            </div>
+            {/* Coordinates are resolved automatically from the address */}
 
             <div className="flex flex-col sm:flex-row gap-3 pt-4">
               <button

@@ -125,6 +125,19 @@ export default function MapView({ events, onEventClick }: MapViewProps) {
                       {category.label}
                     </span>
                   </div>
+                  <div className="mt-3 flex justify-end">
+                    <button
+                      onClick={() => onEventClick?.(event)}
+                      disabled={!!(event.maxParticipants && event.currentParticipants >= event.maxParticipants)}
+                      className={`px-3 py-1 rounded-md text-sm font-medium text-white ${
+                        event.maxParticipants && event.currentParticipants >= event.maxParticipants
+                          ? 'bg-gray-400 cursor-not-allowed'
+                          : 'bg-blue-600 hover:bg-blue-700'
+                      }`}
+                    >
+                      Meld deg på
+                    </button>
+                  </div>
                 </div>
               </Popup>
             </Marker>

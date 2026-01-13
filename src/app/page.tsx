@@ -141,6 +141,17 @@ export default function Home() {
     setEvents([newEvent, ...events]);
   };
 
+  const handleSignUp = (id: string) => {
+    setEvents((prev) =>
+      prev.map((ev) => {
+        if (ev.id !== id) return ev;
+        const isFull = ev.maxParticipants && ev.currentParticipants >= ev.maxParticipants;
+        if (isFull) return ev;
+        return { ...ev, currentParticipants: ev.currentParticipants + 1 };
+      })
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-950">
       <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
@@ -216,12 +227,12 @@ export default function Home() {
           </div>
         ) : viewMode === 'map' ? (
           <div className="h-[600px] w-full">
-            <MapView events={filteredEvents} />
+            <MapView events={filteredEvents} onEventClick={(e) => handleSignUp(e.id)} />
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredEvents.map((event) => (
-              <EventCard key={event.id} event={event} />
+              <EventCard key={event.id} event={event} onSignUp={handleSignUp} />
             ))}
           </div>
         )}
