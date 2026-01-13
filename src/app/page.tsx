@@ -181,7 +181,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="card-surface p-6 flex items-center gap-4">
             <img
-              src="https://raw.githubusercontent.com/Evollum/inkluderingsapp/main/bilder/198ce145-031c-4804-92f9-49bd1e90e64b.png"
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/bilder/198ce145-031c-4804-92f9-49bd1e90e64b.png`}
               alt="ses logo"
               className="h-12 w-12 object-contain logo-img"
             />
