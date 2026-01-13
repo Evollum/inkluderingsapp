@@ -6,6 +6,7 @@ import EventCard from '@/components/EventCard';
 import FilterBar from '@/components/FilterBar';
 import AddEventForm from '@/components/AddEventForm';
 import { Event, EventCategory, CITIES } from '@/types/event';
+import Toast from '@/components/Toast';
 
 const MapView = dynamic(() => import('@/components/MapView'), { ssr: false });
 
@@ -130,6 +131,7 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<EventCategory | 'all'>('all');
   const [showAddForm, setShowAddForm] = useState(false);
   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
+  const [toast, setToast] = useState<null | { id: string; message: string; type?: 'success' | 'info' | 'error' }>(null);
 
   const filteredEvents = events.filter((event) => {
     const cityMatch = selectedCity === 'all' || event.city === selectedCity;
@@ -139,6 +141,7 @@ export default function Home() {
 
   const handleAddEvent = (newEvent: Event) => {
     setEvents([newEvent, ...events]);
+    setToast({ id: newEvent.id, message: 'Arrangement lagt til', type: 'success' });
   };
 
   const handleSignUp = (id: string) => {
@@ -150,6 +153,7 @@ export default function Home() {
         return { ...ev, currentParticipants: ev.currentParticipants + 1 };
       })
     );
+    setToast({ id: id, message: 'Du er påmeldt!', type: 'success' });
   };
 
   return (
@@ -215,6 +219,17 @@ export default function Home() {
           onCityChange={setSelectedCity}
           onCategoryChange={setSelectedCategory}
         />
+
+        <div className="toast-container">
+          {toast && (
+            <Toast
+              key={toast.id}
+              message={toast.message}
+              type={toast.type}
+              onClose={() => setToast(null)}
+            />
+          )}
+        </div>
 
         {filteredEvents.length === 0 ? (
           <div className="text-center py-16">

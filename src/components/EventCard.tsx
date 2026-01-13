@@ -11,7 +11,7 @@ export default function EventCard({ event, onSignUp }: EventCardProps) {
   const category = CATEGORIES[event.category];
   
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+    <div className="card-surface dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden hover:shadow-lg transform hover:-translate-y-0.5 transition-all">
       <div className={`h-2 ${category.color}`} />
       <div className="p-6">
         <div className="flex items-start justify-between gap-4 mb-2">
@@ -28,7 +28,7 @@ export default function EventCard({ event, onSignUp }: EventCardProps) {
           </div>
         </div>
         
-        <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300 mb-4">
+        <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
           {event.description}
         </p>
         
