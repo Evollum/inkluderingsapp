@@ -1,9 +1,10 @@
-'use client';
+ 'use client';
 
 import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { Event, CATEGORIES } from '@/types/event';
+import { formatTimeDot, formatDateShort } from '@/lib/format';
 
 // Fix for default marker icons in Next.js
 delete (L.Icon.Default.prototype as any)._getIconUrl;
