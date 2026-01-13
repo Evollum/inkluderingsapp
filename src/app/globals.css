@@ -18,8 +18,18 @@
 
 /* Logo tweaks: remove white background visually using blend mode */
 .logo-img {
-  mix-blend-mode: multiply;
-  background: transparent;
+  mix-blend-mode: normal;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.6));
+}
+
+.logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  box-shadow: 0 6px 14px rgba(2,6,23,0.6);
 }
 
 .dark {

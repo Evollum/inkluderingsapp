@@ -180,11 +180,13 @@ export default function Home() {
       <header className="py-8">
         <div className="container mx-auto px-4">
           <div className="card-surface p-6 flex items-center gap-4">
-            <img
-              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/bilder/198ce145-031c-4804-92f9-49bd1e90e64b.png`}
-              alt="ses logo"
-              className="h-12 w-12 object-contain logo-img"
-            />
+            <div className="logo-wrap">
+              <img
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/bilder/198ce145-031c-4804-92f9-49bd1e90e64b.png`}
+                alt="ses logo"
+                className="h-12 w-12 object-contain logo-img"
+              />
+            </div>
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight label">ses</h1>
           </div>
           {/* mobile placeholder removed (was causing duplicate rendering) */}
