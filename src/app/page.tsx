@@ -218,12 +218,7 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div>
-            {/* bottom nav for mobile */}
-            <div className="sm:hidden">
-              <script />
-            </div>
-          </div>
+          {/* mobile placeholder removed (was causing duplicate rendering) */}
         </div>
       </header>
 
