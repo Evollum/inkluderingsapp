@@ -36,13 +36,20 @@ npm run dev
 
 3. Åpne http://localhost:3000 i nettleseren.
 
+## Navigasjon / Ruter
+
+- `/` er en enkel "splash"-forside (trykk på SES-logoen for å fortsette).
+- `/events` er hovedsiden med arrangementliste og kart.
+
 ## Prosjektstruktur
 
 ```
 src/
 ├── app/
 │   ├── layout.tsx       # Root layout
-│   ├── page.tsx         # Hovedside
+│   ├── page.tsx         # Splash/forside
+│   └── events/
+│       └── page.tsx     # Hovedside (arrangementer + kart)
 │   └── globals.css      # Global styles
 ├── components/
 │   ├── EventCard.tsx    # Arrangement kort
